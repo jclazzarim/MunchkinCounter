@@ -1,15 +1,14 @@
 package br.android.munchkin.munchkincounter;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -18,13 +17,23 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
+
+        ft.add(R.id.flBotaoPlayer, new AddPlayerButton());
+        ft.add(R.id.flPlayers, new PlayersFragment());
+        ft.add(R.id.flBotaoJogar, new StartGameButton());
+
+        ft.commit();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,4 +1,31 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    tools:context=".MainActivity" tools:ignore="MergeRootFrame" />
+    tools:context=".MainActivity" tools:ignore="MergeRootFrame"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/flBotaoPlayer"
+        android:background="#FF0000"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <FrameLayout
+        android:id="@+id/flPlayers"
+        android:background="#00FF00"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"/>
+
+    <FrameLayout
+        android:id="@+id/flBotaoJogar"
+        android:background="#0000FF"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+
+
+    </LinearLayout>
