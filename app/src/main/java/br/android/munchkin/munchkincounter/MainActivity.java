@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 
 public class MainActivity extends ActionBarActivity {
 
+    public AddPlayerButton apb;
+    public StartGameButton sgb;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,12 +28,14 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        apb = new AddPlayerButton();
+        sgb = new StartGameButton();
 
         FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
 
-        ft.add(R.id.flBotaoPlayer, new AddPlayerButton());
+        ft.add(R.id.flBotaoPlayer, apb);
         ft.add(R.id.flPlayers, new PlayersFragment());
-        ft.add(R.id.flBotaoJogar, new StartGameButton());
+        ft.add(R.id.flBotaoJogar, sgb);
 
         ft.commit();
 

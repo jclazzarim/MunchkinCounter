@@ -3,10 +3,13 @@ package br.android.munchkin.munchkincounter;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 public class AddPlayerButton extends Fragment {
@@ -45,10 +48,15 @@ public class AddPlayerButton extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        Button btnAddJogador = (Button) getActivity().findViewById(R.id.btnAddJogador);
+
+        btnAddJogador.setOnClickListener(new AdicionaJogador());
     }
 
     @Override
@@ -58,6 +66,20 @@ public class AddPlayerButton extends Fragment {
         return inflater.inflate(R.layout.fragment_add_player_button, container, false);
     }
 
+
+    private class AdicionaJogador implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.flPlayers, new CadastroJogador());
+            ft.detach(((MainActivity)getActivity()).apb);
+            ft.detach(((MainActivity)getActivity()).sgb);
+
+            ft.commit();
+        }
+
+    }
 
 
 }
