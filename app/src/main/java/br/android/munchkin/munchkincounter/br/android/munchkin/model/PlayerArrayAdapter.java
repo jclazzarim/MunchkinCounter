@@ -1,12 +1,15 @@
 package br.android.munchkin.munchkincounter.br.android.munchkin.model;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -17,14 +20,13 @@ import br.android.munchkin.munchkincounter.R;
  */
 public class PlayerArrayAdapter extends ArrayAdapter<Player> implements View.OnClickListener {
 
-    private  Context context;
-    private  int resource;
-    private  List<Player> objects;
+    private Context context;
+    private int resource;
+    private List<Player> objects;
     private LayoutInflater inflater;
-    private TextView tvOrdem;
     private TextView tvNome;
-    private TextView tvQuantidadeJogos;
-    private TextView tvQuantidadeVitorias;
+    private TextView tvQJ;
+    private TextView tvQV;
     private ImageView ivDeletar;
     private ImageView ivSexo;
 
@@ -42,7 +44,7 @@ public class PlayerArrayAdapter extends ArrayAdapter<Player> implements View.OnC
 
     @Override
     public void onClick(View v) {
-
+        Toast.makeText(getContext(), "Clicou", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -50,30 +52,62 @@ public class PlayerArrayAdapter extends ArrayAdapter<Player> implements View.OnC
     public View getView(int position, View convertView, ViewGroup parent) {
         Player item = this.getItem(position);
 
-        if (convertView == null ){
+        if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_list_player, null);
         }
         getCampos(convertView);
 
         tvNome.setText(item.getNome());
-       // tvQuantidadeJogos.setText(item.getJogos());
-//        tvQuantidadeVitorias.setText(item.getVitorias());
+        tvQJ.setText(item.getJogos().toString());
+        tvQV.setText(item.getVitorias().toString());
 
         ivSexo.setBackgroundResource(item.getSexo().getResourses());
-
-        //TODO falta fazer umas piras aqui lokamente
-
+        ivDeletar.setOnClickListener(new DeletarJogador(item));
         return convertView;
     }
 
 
-    private void getCampos(View convertView){
-        tvQuantidadeJogos = (TextView) convertView.findViewById(R.id.tvQuantidadeJogos);
-        tvQuantidadeVitorias = (TextView) convertView.findViewById(R.id.tvQuantidadeVitorias);
-        tvOrdem = (TextView) convertView.findViewById(R.id.tvOrdem);
+    private void getCampos(View convertView) {
+        tvQJ = (TextView) convertView.findViewById(R.id.tvQuantidadeJogos);
+        tvQV = (TextView) convertView.findViewById(R.id.tvQuantidadeVitorias);
         tvNome = (TextView) convertView.findViewById(R.id.tvNome);
-         ivDeletar = (ImageView) convertView.findViewById(R.id.ivDeletar);
-         ivSexo = (ImageView) convertView.findViewById(R.id.ivSexo);
+        ivDeletar = (ImageView) convertView.findViewById(R.id.ivDeletar);
+        ivSexo = (ImageView) convertView.findViewById(R.id.ivSexo);
     }
 
+    private class DeletarJogador implements View.OnClickListener {
+
+        private Player jogador;
+
+        private DeletarJogador(Player jogador) {
+            this.jogador = jogador;
+        }
+
+        @Override
+        public void onClick(View v) {
+            dialogoDeletarJogador();
+        }
+
+        private void dialogoDeletarJogador() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Deletar jogador!!!!");
+            builder.setMessage("Deseja deletar o jogador: " + jogador.getNome() + "?");
+
+            builder.setPositiveButton("Mata esse fdp!!!!", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface arg0, int arg1) {
+                    Toast.makeText(getContext(), "A cabeça de " + jogador.getNome() + " rola pelo chão!", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            builder.setNegativeButton("Let he live!!", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface arg0, int arg1) {
+                    Toast.makeText(getContext(), jogador.getNome() + " permanece vivo! ", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            AlertDialog alerta = builder.create();
+            alerta.show();
+        }
+
+    }
 }
