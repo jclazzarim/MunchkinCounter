@@ -7,8 +7,8 @@ import br.android.munchkin.munchkincounter.R;
  */
 public enum EImagemSexo {
 
-    MASCULINO(R.drawable.img1),
-    FEMININO(R.drawable.img1)
+    MASCULINO(R.drawable.homem),
+    FEMININO(R.drawable.mulher)
         ;
     private int resourses;
 

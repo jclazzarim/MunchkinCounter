@@ -29,7 +29,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_weight="1"
-                android:background="@drawable/img1" />
+                android:background="@drawable/homem" />
             </LinearLayout>
 
     </LinearLayout>

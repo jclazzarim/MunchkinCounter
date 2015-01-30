@@ -90,7 +90,7 @@
             android:id="@+id/ivDeletar"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:background="@drawable/ic_launcher"/>
+            android:background="@drawable/lixo"/>
 
     </LinearLayout>
 
