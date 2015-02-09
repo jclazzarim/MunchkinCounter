@@ -11,25 +11,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends android.support.v4.app.FragmentActivity {
 
-    public TopButton apb;
-    public BottomButton sgb;
+    private TopButton apb;
+    private BottomButton sgb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        apb = new TopButton();
-        sgb = new BottomButton();
-
         FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
 
+        apb = new TopButton();
         ft.add(R.id.flTopButton, apb);
-        ft.add(R.id.flCenter, FragmentController.EFragment.PLAYERS_FRAGMENT.getFragment());
+
+
+        sgb = new BottomButton();
         ft.add(R.id.flBotButton, sgb);
 
+        ft.add(R.id.flCenter, FragmentController.EFragment.PLAYERS_FRAGMENT.getFragment());
         ft.commit();
     }
 
@@ -38,7 +39,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onStart() {
         super.onStart();
         FragmentController.changeCenterFragment(FragmentController.EFragment.PLAYERS_FRAGMENT, this);
-
     }
 
     @Override

@@ -1,5 +1,9 @@
 package br.android.munchkin.munchkincounter.br.android.munchkin.model;
 
+import android.widget.ImageView;
+
+import br.android.munchkin.munchkincounter.R;
+
 /**
  * Created by SOFT0085 on 26/01/2015.
  */
@@ -19,6 +23,10 @@ public class Player {
 
     public void setSexo(EImagemSexo sexo) {
         this.sexo = sexo;
+    }
+
+    public void setSexo(ImageView sexo) {
+
     }
 
     public Integer getVitorias() {

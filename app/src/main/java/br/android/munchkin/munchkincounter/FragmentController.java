@@ -1,6 +1,5 @@
 package br.android.munchkin.munchkincounter;
 
-import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -21,11 +20,12 @@ public class FragmentController {
         ft.replace(R.id.flCenter, eTelas.getFragment());
         ft.commit();
 
-        ((IButtonControl)eTelas.getFragment()).gerenciaTopButton();
-        ((IButtonControl)eTelas.getFragment()).gerenciaBotButton();;
+        ((IButtonControl) eTelas.getFragment()).gerenciaTopButton();
+        ((IButtonControl) eTelas.getFragment()).gerenciaBotButton();
+        ;
     }
 
-    private static PlayersFragment getPlayersFragment() {
+    static PlayersFragment getPlayersFragment() {
         if (playersFragment == null) {
             playersFragment = new PlayersFragment();
         }
@@ -33,10 +33,10 @@ public class FragmentController {
         return playersFragment;
     }
 
-    private static CadastroJogador getCadastroJogadorFragment() {
-        if (cadastroJogador == null) {
-            cadastroJogador = new CadastroJogador();
-        }
+    static CadastroJogador getCadastroJogadorFragment() {
+//        if (cadastroJogador == null) {
+        cadastroJogador = new CadastroJogador();
+//        }
 
         return cadastroJogador;
     }

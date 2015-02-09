@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,9 +17,8 @@ import java.util.List;
 import br.android.munchkin.munchkincounter.R;
 
 /**
- * Created by SOFT0085 on 26/01/2015.
  */
-public class PlayerArrayAdapter extends ArrayAdapter<Player> implements View.OnClickListener {
+public class PlayerArrayAdapter extends ArrayAdapter<Player> implements View.OnClickListener, ListAdapter {
 
     private Context context;
     private int resource;

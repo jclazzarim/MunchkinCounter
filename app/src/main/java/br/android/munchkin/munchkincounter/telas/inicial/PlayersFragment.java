@@ -33,7 +33,7 @@ public class PlayersFragment extends Fragment implements AbsListView.OnItemClick
      * The Adapter which will be used to populate the ListView/GridView with
      * Views.
      */
-    private ListAdapter mAdapter;
+    private PlayerArrayAdapter mAdapter;
 
     public static PlayersFragment newInstance(String param1, String param2) {
         PlayersFragment fragment = new PlayersFragment();
@@ -86,18 +86,13 @@ public class PlayersFragment extends Fragment implements AbsListView.OnItemClick
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+    }
+
+    public void addMunchkin(Player player) {
+        mAdapter.add(player);
+        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
     }
 
     public void gerenciaTopButton() {
