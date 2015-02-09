@@ -50,6 +50,10 @@ public class PlayerArrayAdapter extends ArrayAdapter<Player> implements View.OnC
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        if (objects == null) {
+            return convertView;
+        }
+
         Player item = this.getItem(position);
 
         if (convertView == null) {

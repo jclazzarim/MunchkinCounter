@@ -13,31 +13,31 @@ import android.view.ViewGroup;
 
 public class MainActivity extends ActionBarActivity {
 
-    public AddPlayerButton apb;
-    public StartGameButton sgb;
-
+    public TopButton apb;
+    public BottomButton sgb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        apb = new TopButton();
+        sgb = new BottomButton();
+
+        FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
+
+        ft.add(R.id.flTopButton, apb);
+        ft.add(R.id.flCenter, FragmentController.EFragment.PLAYERS_FRAGMENT.getFragment());
+        ft.add(R.id.flBotButton, sgb);
+
+        ft.commit();
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        apb = new AddPlayerButton();
-        sgb = new StartGameButton();
-
-        FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
-
-        ft.add(R.id.flBotaoPlayer, apb);
-        ft.add(R.id.flPlayers, new PlayersFragment());
-        ft.add(R.id.flBotaoJogar, sgb);
-
-        ft.commit();
+        FragmentController.changeCenterFragment(FragmentController.EFragment.PLAYERS_FRAGMENT, this);
 
     }
 
@@ -78,4 +78,9 @@ public class MainActivity extends ActionBarActivity {
             return rootView;
         }
     }
+
+
+
+
+
 }

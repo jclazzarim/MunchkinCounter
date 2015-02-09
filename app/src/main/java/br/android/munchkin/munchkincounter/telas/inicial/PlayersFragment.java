@@ -1,7 +1,6 @@
-package br.android.munchkin.munchkincounter;
+package br.android.munchkin.munchkincounter.telas.inicial;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,20 +8,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
-import android.widget.TextView;
-
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import br.android.munchkin.munchkincounter.BottomButton;
+import br.android.munchkin.munchkincounter.FragmentController;
+import br.android.munchkin.munchkincounter.IButtonControl;
+import br.android.munchkin.munchkincounter.R;
+import br.android.munchkin.munchkincounter.TopButton;
 import br.android.munchkin.munchkincounter.br.android.munchkin.model.EImagemSexo;
 import br.android.munchkin.munchkincounter.br.android.munchkin.model.Player;
 import br.android.munchkin.munchkincounter.br.android.munchkin.model.PlayerArrayAdapter;
-import br.android.munchkin.munchkincounter.dummy.DummyContent;
 
-public class PlayersFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class PlayersFragment extends Fragment implements AbsListView.OnItemClickListener, IButtonControl {
     /**
      * The fragment's ListView/GridView.
      */
@@ -34,7 +35,6 @@ public class PlayersFragment extends Fragment implements AbsListView.OnItemClick
      */
     private ListAdapter mAdapter;
 
-    // TODO: Rename and change types of parameters
     public static PlayersFragment newInstance(String param1, String param2) {
         PlayersFragment fragment = new PlayersFragment();
         return fragment;
@@ -59,9 +59,9 @@ public class PlayersFragment extends Fragment implements AbsListView.OnItemClick
 
         List<Player> ps = new ArrayList<>();
 
-        for (int i = 0; i < 100; i++) {
-            ps.add(p);
-        }
+//        for (int i = 0; i < 5; i++) {
+//            ps.add(p);
+//        }
         mAdapter = new PlayerArrayAdapter(getActivity(), R.layout.list_players, ps);
     }
 
@@ -85,27 +85,42 @@ public class PlayersFragment extends Fragment implements AbsListView.OnItemClick
         super.onAttach(activity);
     }
 
-
-
-    /**
-     * The default content for this Fragment has a TextView that is shown when
-     * the list is empty. If you would like to change the text, call this method
-     * to supply the text it should use.
-     */
-    public void setEmptyText(CharSequence emptyText) {
-        View emptyView = mListView.getEmptyView();
-
-        if (emptyView instanceof TextView) {
-            ((TextView) emptyView).setText(emptyText);
-        }
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
 
+    public void gerenciaTopButton() {
+        TopButton.setButtonAction("Add munchkin", new AdicionaJogador());
+    }
 
+    public void gerenciaBotButton() {
+        BottomButton.setButtonAction("Começar massacre", new ComecarJogo());
+    }
 
+    private class AdicionaJogador implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            FragmentController.changeCenterFragment(FragmentController.EFragment.CADASTRO_JOGADOR, PlayersFragment.this.getActivity());
+        }
+    }
+
+    private class ComecarJogo implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(PlayersFragment.this.getActivity(), "Iniciando massacre!!!", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

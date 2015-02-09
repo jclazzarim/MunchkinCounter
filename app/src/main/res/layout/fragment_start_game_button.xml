@@ -1,7 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.android.munchkin.munchkincounter.StartGameButton">
+    tools:context="br.android.munchkin.munchkincounter.BottomButton">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -9,6 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/start_game"
-        android:id="@+id/button2"
+        android:id="@+id/btnBotButton"
         android:layout_gravity="center_horizontal|bottom" />
 </FrameLayout>
