@@ -1,5 +1,6 @@
 package br.android.munchkin.munchkincounter.telas.jogador;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.android.munchkin.munchkincounter.BottomButton;
 import br.android.munchkin.munchkincounter.FragmentController;
@@ -16,7 +18,7 @@ import br.android.munchkin.munchkincounter.R;
 import br.android.munchkin.munchkincounter.TopButton;
 import br.android.munchkin.munchkincounter.br.android.munchkin.model.EImagemSexo;
 import br.android.munchkin.munchkincounter.br.android.munchkin.model.Player;
-import br.android.munchkin.munchkincounter.telas.inicial.PlayersFragment;
+import br.android.munchkin.munchkincounter.persistencia.DataHelper;
 
 
 public class CadastroJogador extends Fragment implements IButtonControl {
@@ -24,9 +26,16 @@ public class CadastroJogador extends Fragment implements IButtonControl {
     private ImageView ivImagemCadastro;
     private TextView tvNomeCadastro;
     private EImagemSexo img = EImagemSexo.MASCULINO;
-    private Player p;
+    private DataHelper dh;
 
     public CadastroJogador() {
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        dh = new DataHelper(activity);
     }
 
     @Override
@@ -44,7 +53,6 @@ public class CadastroJogador extends Fragment implements IButtonControl {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        p = new Player();
         tvNomeCadastro = (TextView) getActivity().findViewById(R.id.tvNomeCadastro);
 
         ivImagemCadastro = (ImageView) getActivity().findViewById(R.id.ivSexoCadastro);
@@ -63,8 +71,14 @@ public class CadastroJogador extends Fragment implements IButtonControl {
 
     private void changeCenterFragment() {
         FragmentController.changeCenterFragment(FragmentController.EFragment.PLAYERS_FRAGMENT, CadastroJogador.this.getActivity());
+        limpar();
     }
 
+    private void limpar() {
+        tvNomeCadastro.setText("");
+        img = EImagemSexo.MASCULINO;
+        ivImagemCadastro.setBackgroundResource(img.getResourses());
+    }
 
     private class Cancelar implements View.OnClickListener {
 
@@ -78,13 +92,29 @@ public class CadastroJogador extends Fragment implements IButtonControl {
     private class Confirmar implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            String nome = tvNomeCadastro.getText().toString();
+
+            if (!nome.isEmpty()) {
+                Player p = new Player();
+
+                Player player = dh.consultaPorNome(nome);
+                if (player != null && player.getId() != null) {
+                    Toast.makeText(getActivity(), "Já existe um Munchkin cadastrado com este nome!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                p.setNome(nome);
+                p.setSexo(img);
+
+                dh.insert(p);
+
+                changeCenterFragment();
 
 
-            p.setNome(tvNomeCadastro.getText().toString());
-            p.setSexo(img);
+            } else {
+                Toast.makeText(getActivity(), "É necessário dar um nome para o Munchkin!", Toast.LENGTH_SHORT).show();
+            }
 
-            ((PlayersFragment) FragmentController.EFragment.PLAYERS_FRAGMENT.getFragment()).addMunchkin(p);
-            changeCenterFragment();
         }
     }
 

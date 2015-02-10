@@ -22,7 +22,12 @@ public class FragmentController {
 
         ((IButtonControl) eTelas.getFragment()).gerenciaTopButton();
         ((IButtonControl) eTelas.getFragment()).gerenciaBotButton();
-        ;
+    }
+
+    public static void detachCenterFragment(EFragment eTela, FragmentActivity activity){
+        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        ft.detach(eTela.getFragment());
+        ft.commit();
     }
 
     static PlayersFragment getPlayersFragment() {

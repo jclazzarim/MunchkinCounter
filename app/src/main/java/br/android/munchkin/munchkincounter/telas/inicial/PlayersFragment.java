@@ -22,8 +22,9 @@ import br.android.munchkin.munchkincounter.TopButton;
 import br.android.munchkin.munchkincounter.br.android.munchkin.model.EImagemSexo;
 import br.android.munchkin.munchkincounter.br.android.munchkin.model.Player;
 import br.android.munchkin.munchkincounter.br.android.munchkin.model.PlayerArrayAdapter;
+import br.android.munchkin.munchkincounter.persistencia.DataHelper;
 
-public class PlayersFragment extends Fragment implements AbsListView.OnItemClickListener, IButtonControl {
+public class PlayersFragment extends Fragment implements IButtonControl {
     /**
      * The fragment's ListView/GridView.
      */
@@ -35,6 +36,8 @@ public class PlayersFragment extends Fragment implements AbsListView.OnItemClick
      */
     private PlayerArrayAdapter mAdapter;
 
+    private DataHelper dh;
+
     public static PlayersFragment newInstance(String param1, String param2) {
         PlayersFragment fragment = new PlayersFragment();
         return fragment;
@@ -45,24 +48,21 @@ public class PlayersFragment extends Fragment implements AbsListView.OnItemClick
      * fragment (e.g. upon screen orientation changes).
      */
     public PlayersFragment() {
+
+
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        dh = new DataHelper(activity);
+
+        mAdapter = new PlayerArrayAdapter(activity, R.layout.list_players, dh.selectAll());
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Player p = new Player();
-        p.setJogos(2);
-        p.setNome("Bastião");
-        p.setSexo(EImagemSexo.MASCULINO);
-        p.setVitorias(2);
-
-        List<Player> ps = new ArrayList<>();
-
-//        for (int i = 0; i < 5; i++) {
-//            ps.add(p);
-//        }
-        mAdapter = new PlayerArrayAdapter(getActivity(), R.layout.list_players, ps);
     }
 
     @Override
@@ -74,25 +74,13 @@ public class PlayersFragment extends Fragment implements AbsListView.OnItemClick
         mListView = (AbsListView) view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
-        // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener(this);
-
         return view;
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-    }
 
     public void addMunchkin(Player player) {
-        mAdapter.add(player);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+        ((PlayerArrayAdapter) mListView.getAdapter()).add(player);
+        ((PlayerArrayAdapter) mListView.getAdapter()).notifyDataSetChanged();
     }
 
     public void gerenciaTopButton() {

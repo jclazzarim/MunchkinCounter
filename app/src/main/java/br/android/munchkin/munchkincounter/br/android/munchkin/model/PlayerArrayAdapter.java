@@ -15,10 +15,11 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.android.munchkin.munchkincounter.R;
+import br.android.munchkin.munchkincounter.persistencia.DataHelper;
 
 /**
  */
-public class PlayerArrayAdapter extends ArrayAdapter<Player> implements View.OnClickListener, ListAdapter {
+public class PlayerArrayAdapter extends ArrayAdapter<Player> implements ListAdapter {
 
     private Context context;
     private int resource;
@@ -30,6 +31,8 @@ public class PlayerArrayAdapter extends ArrayAdapter<Player> implements View.OnC
     private ImageView ivDeletar;
     private ImageView ivSexo;
 
+    private DataHelper dh;
+
     public PlayerArrayAdapter(Context context, int resource) {
         super(context, resource);
     }
@@ -40,13 +43,8 @@ public class PlayerArrayAdapter extends ArrayAdapter<Player> implements View.OnC
         this.resource = resource;
         this.objects = objects;
         inflater = LayoutInflater.from(context);
+        dh = new DataHelper(context);
     }
-
-    @Override
-    public void onClick(View v) {
-        Toast.makeText(getContext(), "Clicou", Toast.LENGTH_SHORT).show();
-    }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -99,6 +97,9 @@ public class PlayerArrayAdapter extends ArrayAdapter<Player> implements View.OnC
 
             builder.setPositiveButton("Mata esse fdp!!!!", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface arg0, int arg1) {
+                    remove(jogador);
+                    dh.delete(jogador);
+                    notifyDataSetChanged();
                     Toast.makeText(getContext(), "A cabeça de " + jogador.getNome() + " rola pelo chão!", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -112,6 +113,5 @@ public class PlayerArrayAdapter extends ArrayAdapter<Player> implements View.OnC
             AlertDialog alerta = builder.create();
             alerta.show();
         }
-
     }
 }
