@@ -11,15 +11,11 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import br.android.munchkin.munchkincounter.BottomButton;
-import br.android.munchkin.munchkincounter.FragmentController;
-import br.android.munchkin.munchkincounter.IButtonControl;
+import br.android.munchkin.munchkincounter.telas.comum.BottomButton;
+import br.android.munchkin.munchkincounter.telas.comum.FragmentController;
+import br.android.munchkin.munchkincounter.telas.comum.IButtonControl;
 import br.android.munchkin.munchkincounter.R;
-import br.android.munchkin.munchkincounter.TopButton;
-import br.android.munchkin.munchkincounter.br.android.munchkin.model.EImagemSexo;
+import br.android.munchkin.munchkincounter.telas.comum.TopButton;
 import br.android.munchkin.munchkincounter.br.android.munchkin.model.Player;
 import br.android.munchkin.munchkincounter.br.android.munchkin.model.PlayerArrayAdapter;
 import br.android.munchkin.munchkincounter.persistencia.DataHelper;

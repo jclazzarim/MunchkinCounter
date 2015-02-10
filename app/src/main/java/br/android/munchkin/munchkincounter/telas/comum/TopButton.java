@@ -1,4 +1,4 @@
-package br.android.munchkin.munchkincounter;
+package br.android.munchkin.munchkincounter.telas.comum;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import br.android.munchkin.munchkincounter.R;
 
-public class BottomButton extends Fragment {
-    private static Button btnBottomButton;
 
-    public BottomButton() {
+public class TopButton extends Fragment {
+    private static Button btnTopButton;
+
+    public TopButton() {
     }
 
     @Override
@@ -23,15 +25,16 @@ public class BottomButton extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        btnBottomButton = (Button) getActivity().findViewById(R.id.btnBotButton);
+        btnTopButton = (Button) getActivity().findViewById(R.id.btnAddJogador);
+
     }
 
     public static void setOnClickListener(View.OnClickListener listener) {
-        btnBottomButton.setOnClickListener(listener);
+        btnTopButton.setOnClickListener(listener);
     }
 
     public static void setButtonText(String buttonText) {
-        btnBottomButton.setText(buttonText);
+        btnTopButton.setText(buttonText);
     }
 
     public static void setButtonAction(String buttonText, View.OnClickListener listener) {
@@ -42,7 +45,8 @@ public class BottomButton extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_start_game_button, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_add_player_button, container, false);
     }
 
 

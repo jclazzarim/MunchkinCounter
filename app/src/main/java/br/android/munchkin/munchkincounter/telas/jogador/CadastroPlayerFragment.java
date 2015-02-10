@@ -11,24 +11,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import br.android.munchkin.munchkincounter.BottomButton;
-import br.android.munchkin.munchkincounter.FragmentController;
-import br.android.munchkin.munchkincounter.IButtonControl;
+import br.android.munchkin.munchkincounter.telas.comum.BottomButton;
+import br.android.munchkin.munchkincounter.telas.comum.FragmentController;
+import br.android.munchkin.munchkincounter.telas.comum.IButtonControl;
 import br.android.munchkin.munchkincounter.R;
-import br.android.munchkin.munchkincounter.TopButton;
+import br.android.munchkin.munchkincounter.telas.comum.TopButton;
 import br.android.munchkin.munchkincounter.br.android.munchkin.model.EImagemSexo;
 import br.android.munchkin.munchkincounter.br.android.munchkin.model.Player;
 import br.android.munchkin.munchkincounter.persistencia.DataHelper;
 
 
-public class CadastroJogador extends Fragment implements IButtonControl {
+public class CadastroPlayerFragment extends Fragment implements IButtonControl {
 
     private ImageView ivImagemCadastro;
     private TextView tvNomeCadastro;
     private EImagemSexo img = EImagemSexo.MASCULINO;
     private DataHelper dh;
 
-    public CadastroJogador() {
+    public CadastroPlayerFragment() {
     }
 
     @Override
@@ -70,7 +70,7 @@ public class CadastroJogador extends Fragment implements IButtonControl {
     }
 
     private void changeCenterFragment() {
-        FragmentController.changeCenterFragment(FragmentController.EFragment.PLAYERS_FRAGMENT, CadastroJogador.this.getActivity());
+        FragmentController.changeCenterFragment(FragmentController.EFragment.PLAYERS_FRAGMENT, CadastroPlayerFragment.this.getActivity());
         limpar();
     }
 

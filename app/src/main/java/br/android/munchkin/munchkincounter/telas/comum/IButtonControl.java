@@ -1,4 +1,4 @@
-package br.android.munchkin.munchkincounter;
+package br.android.munchkin.munchkincounter.telas.comum;
 
 /**
  * Created by SOFT0085 on 09/02/2015.

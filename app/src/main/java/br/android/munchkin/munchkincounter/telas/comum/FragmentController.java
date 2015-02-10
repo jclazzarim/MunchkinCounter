@@ -1,11 +1,12 @@
-package br.android.munchkin.munchkincounter;
+package br.android.munchkin.munchkincounter.telas.comum;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
+import br.android.munchkin.munchkincounter.R;
 import br.android.munchkin.munchkincounter.telas.inicial.PlayersFragment;
-import br.android.munchkin.munchkincounter.telas.jogador.CadastroJogador;
+import br.android.munchkin.munchkincounter.telas.jogador.CadastroPlayerFragment;
 
 /**
  * Created by SOFT0085 on 09/02/2015.
@@ -13,7 +14,7 @@ import br.android.munchkin.munchkincounter.telas.jogador.CadastroJogador;
 public class FragmentController {
 
     private static PlayersFragment playersFragment;
-    private static CadastroJogador cadastroJogador;
+    private static CadastroPlayerFragment cadastroJogador;
 
     public static void changeCenterFragment(EFragment eTelas, FragmentActivity activity) {
         FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
@@ -38,9 +39,9 @@ public class FragmentController {
         return playersFragment;
     }
 
-    static CadastroJogador getCadastroJogadorFragment() {
+    static CadastroPlayerFragment getCadastroJogadorFragment() {
 //        if (cadastroJogador == null) {
-        cadastroJogador = new CadastroJogador();
+        cadastroJogador = new CadastroPlayerFragment();
 //        }
 
         return cadastroJogador;
