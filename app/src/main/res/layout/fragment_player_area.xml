@@ -3,6 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
+    android:background="@drawable/background"
     tools:context="br.android.munchkin.munchkincounter.PlayerAreaFragment">
 
 
@@ -14,9 +15,14 @@
         <Button
             android:id="@+id/button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="Raça" />
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="Raça"
+            android:fontFamily="times"
+            android:textColor="#8B4513"
+            android:background="@drawable/btn_1"/>
 
         <TextView
             android:id="@+id/textView"
@@ -24,15 +30,20 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="Nome"
+            android:text="Name"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button
             android:id="@+id/button2"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="Classe" />
+            android:fontFamily="times"
+            android:textColor="#8B4513"
+            android:text="Classe"
+            android:background="@drawable/btn_1" />
     </LinearLayout>
 
     <LinearLayout
@@ -95,7 +106,7 @@
                     android:id="@+id/imageView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/arrowDOWN64" />
+                    android:background="@drawable/arrow_down_64" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -109,7 +120,7 @@
                     android:id="@+id/imageView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/arrowUP64" />
+                    android:background="@drawable/arrow_up_64" />
             </LinearLayout>
 
         </LinearLayout>
@@ -164,7 +175,7 @@
                         android:id="@+id/imageViewx"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/arrowDOWN64" />
+                        android:background="@drawable/arrow_down_64" />
 
                     <TextView
                         android:id="@+id/textViewy"
@@ -178,7 +189,7 @@
                         android:id="@+id/imageViewz"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/arrowUP64" />
+                        android:background="@drawable/arrow_up_64" />
                 </LinearLayout>
 
             </LinearLayout>
